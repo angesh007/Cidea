@@ -3,51 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PETS FROM HELL v2</title>
+  <title>🔥 PETS FROM HELL V2 🔥</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Abril+Fatface&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Scanline + grain overlay -->
+  <div id="grain-overlay"></div>
+  <div id="scanlines"></div>
+
+  <!-- Background chaos layer -->
   <div id="chaos-layer"></div>
   <div id="destruction-overlay"></div>
 
-  <!-- UI Header -->
-  <div id="ui-header">
-    <h1 id="title">🔥 PETS FROM HELL v2 🔥</h1>
-    <div id="stats-bar">
-      <span id="chaos-meter">CHAOS: <span id="chaos-val">0</span>%</span>
-      <span id="spawn-btn" onclick="spawnPet()">+ SPAWN DEMON</span>
-      <span id="nuke-btn" onclick="nukeAll()">☢ NUKE ALL</span>
+  <!-- === HEADER === -->
+  <header id="ui-header">
+    <div id="title-block">
+      <h1 id="title">PETS FROM HELL</h1>
+      <span id="version-tag">V2 · REBORN</span>
     </div>
-  </div>
+    <div id="stats-bar">
+      <div class="stat-pill" id="chaos-pill">
+        <span class="stat-label">☠ CHAOS</span>
+        <span class="stat-value" id="chaos-val">0</span>
+        <span class="stat-unit">%</span>
+      </div>
+      <div class="stat-pill" id="score-pill">
+        <span class="stat-label">💀 SCORE</span>
+        <span class="stat-value" id="score-val">0</span>
+      </div>
+      <div class="stat-pill" id="combo-pill" style="display:none;">
+        <span class="stat-label">🔥 COMBO</span>
+        <span class="stat-value" id="combo-val">x1</span>
+      </div>
+    </div>
+    <div id="header-btns">
+      <button class="hbtn spawn-btn" onclick="spawnPet()">⛧ SPAWN</button>
+      <button class="hbtn nuke-btn" onclick="nukeAll()">☢ NUKE</button>
+      <button class="hbtn board-btn" onclick="toggleLeaderboard()">🏆 BOARD</button>
+      <button class="hbtn sound-btn" id="sound-toggle" onclick="toggleSound()">🔊</button>
+    </div>
+  </header>
 
-  <!-- Pet Template -->
+  <!-- === LEADERBOARD PANEL === -->
+  <aside id="leaderboard-panel" class="hidden">
+    <div id="lb-header">
+      <span>🏆 HALL OF CARNAGE</span>
+      <button onclick="toggleLeaderboard()">✕</button>
+    </div>
+    <div id="lb-current">
+      <div class="lb-row lb-you">
+        <span>YOU</span>
+        <span id="lb-cur-score">0</span>
+        <span id="lb-cur-grade">F</span>
+      </div>
+    </div>
+    <div id="lb-list"></div>
+    <div id="lb-stats">
+      <div class="lb-stat"><span>🍖 FED</span><span id="stat-fed">0</span></div>
+      <div class="lb-stat"><span>💀 EXPLODED</span><span id="stat-exploded">0</span></div>
+      <div class="lb-stat"><span>👿 MINI DEMONS</span><span id="stat-demons">0</span></div>
+      <div class="lb-stat"><span>⚡ ZAPPED</span><span id="stat-zapped">0</span></div>
+      <div class="lb-stat"><span>🔥 SESSIONS</span><span id="stat-sessions">0</span></div>
+    </div>
+    <button id="lb-save-btn" onclick="saveScore()">SAVE SCORE</button>
+  </aside>
+
+  <!-- === PET TEMPLATE === -->
   <template id="pet-template">
     <div class="pet-container">
-      <div class="pet-shadow"></div>
+      <div class="pet-halo"></div>
+      <div class="pet-speech-bubble"></div>
       <div class="pet-body">
         <canvas class="pet-canvas" width="130" height="130"></canvas>
         <div class="pet-emoji-face"></div>
+        <div class="pet-aura"></div>
       </div>
       <div class="pet-name-tag"></div>
-      <div class="pet-speech-bubble"></div>
       <div class="hunger-bar-wrap">
-        <div class="hunger-bar"></div>
+        <div class="hunger-bar-label">HUNGER</div>
+        <div class="hunger-bar-track"><div class="hunger-bar"></div></div>
       </div>
       <div class="pet-actions">
-        <button class="btn-feed">🍖 FEED</button>
-        <button class="btn-poke">👉 POKE</button>
-        <button class="btn-zap">⚡ ZAP</button>
+        <button class="btn-feed" title="Feed (+25 hunger, grows)">🍖</button>
+        <button class="btn-poke" title="Poke (disturb it)">👉</button>
+        <button class="btn-zap" title="ZAP (+10 hunger, chaos)">⚡</button>
+        <button class="btn-pet" title="Pet (make it happy)">🫳</button>
       </div>
+      <div class="pet-xp-bar-wrap">
+        <div class="pet-xp-bar"></div>
+      </div>
+      <div class="pet-score-badge">+0</div>
     </div>
   </template>
 
-  <!-- Sound Toggle -->
-  <div id="sound-toggle" onclick="toggleSound()">🔊</div>
+  <!-- === TOOLTIP === -->
+  <div id="tooltip">
+    <span>🍖 feed</span> · <span>👉 poke</span> · <span>⚡ zap</span> · <span>🫳 pet</span> · <span>drag to move</span>
+  </div>
 
-  <!-- Tooltip -->
-  <div id="tooltip">Drag to pet • Feed • Ignore at your own risk...</div>
+  <!-- === NAME ENTRY MODAL === -->
+  <div id="name-modal" class="hidden">
+    <div id="name-modal-inner">
+      <h2>ENTER YOUR NAME</h2>
+      <p>to save your chaos score</p>
+      <input type="text" id="name-input" maxlength="12" placeholder="DEMON LORD..." />
+      <div id="name-modal-btns">
+        <button onclick="confirmSaveScore()">SAVE ⛧</button>
+        <button onclick="cancelModal()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SCORE POP TEMPLATE === -->
+  <template id="score-pop-template">
+    <div class="score-pop"></div>
+  </template>
 
   <script src="pets.js"></script>
 </body>
