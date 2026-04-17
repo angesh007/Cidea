@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virtual Pet From Hell</title>
+  <title>PETS FROM HELL v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- Background chaos layer -->
   <div id="chaos-layer"></div>
   <div id="destruction-overlay"></div>
 
-  <!-- UI -->
+  <!-- UI Header -->
   <div id="ui-header">
-    <h1 id="title">🔥 PETS FROM HELL 🔥</h1>
+    <h1 id="title">🔥 PETS FROM HELL v2 🔥</h1>
     <div id="stats-bar">
       <span id="chaos-meter">CHAOS: <span id="chaos-val">0</span>%</span>
       <span id="spawn-btn" onclick="spawnPet()">+ SPAWN DEMON</span>
@@ -24,17 +22,19 @@
     </div>
   </div>
 
-  <!-- Pet template (cloned via JS) -->
+  <!-- Pet Template -->
   <template id="pet-template">
     <div class="pet-container">
       <div class="pet-shadow"></div>
       <div class="pet-body">
-        <canvas class="pet-canvas" width="120" height="120"></canvas>
+        <canvas class="pet-canvas" width="130" height="130"></canvas>
         <div class="pet-emoji-face"></div>
       </div>
       <div class="pet-name-tag"></div>
       <div class="pet-speech-bubble"></div>
-      <div class="hunger-bar-wrap"><div class="hunger-bar"></div></div>
+      <div class="hunger-bar-wrap">
+        <div class="hunger-bar"></div>
+      </div>
       <div class="pet-actions">
         <button class="btn-feed">🍖 FEED</button>
         <button class="btn-poke">👉 POKE</button>
@@ -43,10 +43,11 @@
     </div>
   </template>
 
-  <!-- Sound toggle -->
+  <!-- Sound Toggle -->
   <div id="sound-toggle" onclick="toggleSound()">🔊</div>
 
-  <div id="tooltip">Drag to pet · Click feed · Ignore me... I dare you.</div>
+  <!-- Tooltip -->
+  <div id="tooltip">Drag to pet • Feed • Ignore at your own risk...</div>
 
   <script src="pets.js"></script>
 </body>
