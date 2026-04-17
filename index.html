@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Pet From Hell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background chaos layer -->
+  <div id="chaos-layer"></div>
+  <div id="destruction-overlay"></div>
+
+  <!-- UI -->
+  <div id="ui-header">
+    <h1 id="title">🔥 PETS FROM HELL 🔥</h1>
+    <div id="stats-bar">
+      <span id="chaos-meter">CHAOS: <span id="chaos-val">0</span>%</span>
+      <span id="spawn-btn" onclick="spawnPet()">+ SPAWN DEMON</span>
+      <span id="nuke-btn" onclick="nukeAll()">☢ NUKE ALL</span>
+    </div>
+  </div>
+
+  <!-- Pet template (cloned via JS) -->
+  <template id="pet-template">
+    <div class="pet-container">
+      <div class="pet-shadow"></div>
+      <div class="pet-body">
+        <canvas class="pet-canvas" width="120" height="120"></canvas>
+        <div class="pet-emoji-face"></div>
+      </div>
+      <div class="pet-name-tag"></div>
+      <div class="pet-speech-bubble"></div>
+      <div class="hunger-bar-wrap"><div class="hunger-bar"></div></div>
+      <div class="pet-actions">
+        <button class="btn-feed">🍖 FEED</button>
+        <button class="btn-poke">👉 POKE</button>
+        <button class="btn-zap">⚡ ZAP</button>
+      </div>
+    </div>
+  </template>
+
+  <!-- Sound toggle -->
+  <div id="sound-toggle" onclick="toggleSound()">🔊</div>
+
+  <div id="tooltip">Drag to pet · Click feed · Ignore me... I dare you.</div>
+
+  <script src="pets.js"></script>
+</body>
+</html>
