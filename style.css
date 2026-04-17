@@ -1,5 +1,8 @@
 /* ===== RESET & BASE ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+}
 
 :root {
   --hell-red: #ff2020;
@@ -9,7 +12,6 @@
   --hell-green: #00ff88;
   --dark: #0a0005;
   --mid-dark: #150010;
-  --text-glow: 0 0 10px #ff2020, 0 0 20px #ff6a00;
 }
 
 html, body {
@@ -21,14 +23,14 @@ html, body {
   cursor: default;
 }
 
-/* ===== BACKGROUND ===== */
+/* Background */
 body::before {
   content: '';
   position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse at 20% 80%, #3d001a 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, #1a0030 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, #0d0010 0%, transparent 70%);
+    radial-gradient(ellipse at 20% 80%, #3d001a 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, #1a0030 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, #0d0010 0%, transparent 80%);
   z-index: 0;
 }
 
@@ -36,52 +38,43 @@ body::after {
   content: '';
   position: fixed; inset: 0;
   background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(255,0,50,0.03) 2px,
-    rgba(255,0,50,0.03) 4px
+    0deg, transparent, transparent 2px,
+    rgba(255,32,50,0.04) 2px, rgba(255,32,50,0.04) 4px
   );
   z-index: 1;
   pointer-events: none;
 }
 
-/* ===== CHAOS LAYER ===== */
+/* Chaos Layer */
 #chaos-layer {
   position: fixed; inset: 0;
-  z-index: 2;
+  z-index: 5;
   pointer-events: none;
   overflow: hidden;
 }
 
-#destruction-overlay {
-  position: fixed; inset: 0;
-  z-index: 3;
-  pointer-events: none;
-}
-
-/* ===== UI HEADER ===== */
+/* UI Header */
 #ui-header {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
   padding: 12px 24px;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px;
 }
 
 #title {
   font-family: 'Creepster', cursive;
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
   color: var(--hell-red);
-  text-shadow: var(--text-glow);
-  letter-spacing: 2px;
-  animation: title-pulse 2s ease-in-out infinite;
+  text-shadow: 0 0 10px #ff2020, 0 0 20px #ff6a00;
+  letter-spacing: 3px;
+  animation: title-pulse 2.5s ease-in-out infinite;
 }
 
 @keyframes title-pulse {
-  0%, 100% { text-shadow: var(--text-glow); }
-  50% { text-shadow: 0 0 30px #ff2020, 0 0 60px #ff6a00, 0 0 80px #ff0000; }
+  0%,100% { text-shadow: 0 0 10px #ff2020, 0 0 20px #ff6a00; }
+  50% { text-shadow: 0 0 30px #ff2020, 0 0 60px #ff6a00, 0 0 90px #ff0000; }
 }
 
 #stats-bar {
@@ -89,20 +82,19 @@ body::after {
 }
 
 #chaos-meter {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: var(--hell-yellow);
-  text-shadow: 0 0 8px var(--hell-yellow);
-  min-width: 120px;
+  text-shadow: 0 0 10px var(--hell-yellow);
 }
 
 #spawn-btn, #nuke-btn {
   cursor: pointer;
   font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  padding: 4px 14px;
-  border-radius: 4px;
+  font-size: 1.15rem;
+  padding: 6px 16px;
+  border-radius: 6px;
   border: 2px solid;
-  transition: all 0.15s;
+  transition: all 0.2s;
   user-select: none;
 }
 
@@ -111,73 +103,84 @@ body::after {
   border-color: var(--hell-purple);
   color: var(--hell-purple);
 }
-#spawn-btn:hover { background: var(--hell-purple); color: #fff; box-shadow: 0 0 20px var(--hell-purple); }
+
+#spawn-btn:hover {
+  background: var(--hell-purple);
+  color: white;
+  box-shadow: 0 0 25px var(--hell-purple);
+}
 
 #nuke-btn {
   background: rgba(255,32,32,0.15);
   border-color: var(--hell-red);
   color: var(--hell-red);
 }
-#nuke-btn:hover { background: var(--hell-red); color: #fff; box-shadow: 0 0 20px var(--hell-red); }
 
-/* ===== SOUND TOGGLE ===== */
-#sound-toggle {
-  position: fixed; bottom: 16px; right: 16px;
-  z-index: 200;
-  font-size: 1.6rem;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s;
-  user-select: none;
+#nuke-btn:hover {
+  background: var(--hell-red);
+  color: white;
+  box-shadow: 0 0 25px var(--hell-red);
 }
+
+/* Sound Toggle */
+#sound-toggle {
+  position: fixed; bottom: 20px; right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
 #sound-toggle:hover { opacity: 1; }
 
-/* ===== TOOLTIP ===== */
+/* Tooltip */
 #tooltip {
-  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
   z-index: 200;
   font-size: 1rem;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.35);
   pointer-events: none;
-  animation: tooltip-fade 6s ease forwards;
+  animation: tooltip-fade 7s forwards;
 }
-@keyframes tooltip-fade { 0%,70%{opacity:1} 100%{opacity:0} }
 
-/* ===== PET CONTAINER ===== */
+@keyframes tooltip-fade { 0%,75%{opacity:1} 100%{opacity:0} }
+
+/* PET STYLES */
 .pet-container {
   position: absolute;
-  width: 160px;
+  width: 170px;
   display: flex; flex-direction: column; align-items: center;
   z-index: 10;
   user-select: none;
   transition: filter 0.3s;
 }
 
-.pet-container.dragging { z-index: 999; filter: brightness(1.4) drop-shadow(0 0 20px #ff6a00); }
-.pet-container.happy { filter: drop-shadow(0 0 15px var(--hell-green)); }
-.pet-container.angry { filter: drop-shadow(0 0 15px var(--hell-red)) hue-rotate(20deg); }
-.pet-container.dead { filter: grayscale(1) brightness(0.4); }
-
-/* ===== PET SHADOW ===== */
-.pet-shadow {
-  width: 80px; height: 16px;
-  background: radial-gradient(ellipse, rgba(255,0,0,0.4), transparent 70%);
-  margin-top: 4px;
-  transition: width 0.3s, opacity 0.3s;
+.pet-container.dragging {
+  z-index: 999;
+  filter: brightness(1.5) drop-shadow(0 0 25px #ff6a00);
 }
 
-/* ===== PET BODY ===== */
+.pet-shadow {
+  width: 90px; height: 18px;
+  background: radial-gradient(ellipse, rgba(255,0,0,0.45), transparent 75%);
+  margin-top: 6px;
+  transition: width 0.3s;
+}
+
 .pet-body {
   position: relative;
-  width: 120px; height: 120px;
+  width: 130px; height: 130px;
   cursor: grab;
-  animation: pet-float 3s ease-in-out infinite;
+  animation: pet-float 3.2s ease-in-out infinite;
 }
+
 .pet-body:active { cursor: grabbing; }
 
 @keyframes pet-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .pet-canvas {
@@ -188,248 +191,127 @@ body::after {
 .pet-emoji-face {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 2.8rem;
+  font-size: 3rem;
   pointer-events: none;
-  transition: all 0.2s;
 }
 
-/* ===== NAME TAG ===== */
 .pet-name-tag {
   font-family: 'Permanent Marker', cursive;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--hell-yellow);
-  text-shadow: 0 0 6px var(--hell-yellow);
-  margin-top: -4px;
-  letter-spacing: 1px;
-  white-space: nowrap;
+  text-shadow: 0 0 8px var(--hell-yellow);
+  margin-top: -6px;
+  letter-spacing: 1.5px;
 }
 
-/* ===== SPEECH BUBBLE ===== */
 .pet-speech-bubble {
   position: absolute;
-  top: -48px; left: 50%; transform: translateX(-50%);
+  top: -55px; left: 50%; transform: translateX(-50%);
   background: rgba(255,255,255,0.95);
   color: #1a0010;
   font-family: 'Permanent Marker', cursive;
-  font-size: 0.75rem;
-  padding: 5px 10px;
-  border-radius: 12px;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 14px;
   white-space: nowrap;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
+  transition: opacity 0.25s;
   z-index: 20;
-  max-width: 160px;
+  max-width: 170px;
   text-align: center;
-  white-space: normal;
 }
-.pet-speech-bubble::after {
-  content: '';
-  position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: rgba(255,255,255,0.95);
-}
+
 .pet-speech-bubble.visible { opacity: 1; }
 
-/* ===== HUNGER BAR ===== */
+.pet-speech-bubble::after {
+  content: '';
+  position: absolute; bottom: -9px; left: 50%; transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(255,255,255,0.95);
+}
+
 .hunger-bar-wrap {
-  width: 90px; height: 6px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-  margin-top: 4px;
+  width: 100px; height: 7px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 4px;
+  margin-top: 6px;
   overflow: hidden;
 }
+
 .hunger-bar {
   height: 100%;
   width: 100%;
   background: linear-gradient(to right, var(--hell-green), var(--hell-yellow), var(--hell-red));
-  border-radius: 3px;
-  transition: width 0.5s;
+  transition: width 0.4s linear;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* Action Buttons */
 .pet-actions {
-  display: flex; gap: 4px;
-  margin-top: 6px;
+  display: flex; gap: 5px;
+  margin-top: 8px;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.25s;
 }
+
 .pet-container:hover .pet-actions { opacity: 1; }
 
 .pet-actions button {
   font-family: 'VT323', monospace;
-  font-size: 0.8rem;
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(0,0,0,0.7);
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.75);
   color: #fff;
   cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
 }
-.btn-feed:hover { background: rgba(0,200,100,0.4); border-color: var(--hell-green); }
-.btn-poke:hover { background: rgba(255,200,0,0.3); border-color: var(--hell-yellow); }
-.btn-zap:hover { background: rgba(150,0,255,0.4); border-color: var(--hell-purple); }
 
-/* ===== PET ANIMATIONS ===== */
+.btn-feed:hover { border-color: var(--hell-green); background: rgba(0,180,80,0.4); }
+.btn-poke:hover { border-color: var(--hell-yellow); background: rgba(200,180,0,0.4); }
+.btn-zap:hover  { border-color: var(--hell-purple); background: rgba(140,0,255,0.4); }
+
+/* Animations */
 @keyframes wiggle {
   0%,100%{ transform: rotate(0deg); }
-  20%{ transform: rotate(-15deg) scale(1.1); }
-  40%{ transform: rotate(15deg) scale(0.9); }
-  60%{ transform: rotate(-10deg) scale(1.05); }
-  80%{ transform: rotate(8deg); }
+  25%{ transform: rotate(-18deg) scale(1.08); }
+  75%{ transform: rotate(18deg) scale(0.92); }
 }
 
 @keyframes bloat {
   0%{ transform: scale(1); }
-  50%{ transform: scale(1.3) rotate(5deg); }
+  50%{ transform: scale(1.35) rotate(8deg); }
   100%{ transform: scale(1); }
 }
 
 @keyframes zap-shake {
   0%,100%{ transform: translateX(0); }
-  15%{ transform: translateX(-8px) rotate(-5deg); }
-  30%{ transform: translateX(8px) rotate(5deg); }
-  45%{ transform: translateX(-6px); }
-  60%{ transform: translateX(6px); }
-  75%{ transform: translateX(-3px); }
+  20%{ transform: translateX(-10px) rotate(-8deg); }
+  40%{ transform: translateX(10px) rotate(8deg); }
+  60%{ transform: translateX(-6px); }
+  80%{ transform: translateX(6px); }
 }
 
 @keyframes explode-out {
-  0%{ transform: scale(1); opacity: 1; filter: brightness(1); }
-  30%{ transform: scale(2.5); opacity: 1; filter: brightness(5) saturate(5); }
-  100%{ transform: scale(0.1); opacity: 0; }
+  0%{ transform: scale(1); opacity: 1; }
+  40%{ transform: scale(2.8); filter: brightness(6) saturate(3); }
+  100%{ transform: scale(0.05); opacity: 0; }
+}
+
+.pet-anim-wiggle .pet-body { animation: wiggle 0.65s ease-in-out; }
+.pet-anim-bloat .pet-body { animation: bloat 0.6s ease-in-out; }
+.pet-anim-zap .pet-body { animation: zap-shake 0.55s linear; }
+.pet-anim-panic .pet-body { animation: panic-bounce 0.45s infinite; }
+.pet-anim-ghost .pet-body { animation: ghost-drift 2.5s infinite; }
+
+@keyframes panic-bounce {
+  0%,100%{ transform: translateY(0) scaleX(1); }
+  40%{ transform: translateY(-25px) scaleX(0.8); }
+  70%{ transform: translateY(5px) scaleX(1.15); }
 }
 
 @keyframes ghost-drift {
   0%,100%{ transform: translateX(0) rotate(0deg); }
-  25%{ transform: translateX(15px) rotate(5deg); }
-  75%{ transform: translateX(-15px) rotate(-5deg); }
+  50%{ transform: translateX(20px) rotate(8deg); }
 }
 
-@keyframes panic-bounce {
-  0%,100%{ transform: translateY(0) scaleX(1); }
-  30%{ transform: translateY(-20px) scaleX(0.85); }
-  60%{ transform: translateY(0) scaleX(1.2); }
-}
-
-.pet-anim-wiggle .pet-body { animation: wiggle 0.6s ease-in-out; }
-.pet-anim-bloat .pet-body { animation: bloat 0.5s ease-in-out; }
-.pet-anim-zap .pet-body { animation: zap-shake 0.5s linear; }
-.pet-anim-panic .pet-body { animation: panic-bounce 0.4s ease-in-out infinite; }
-.pet-anim-ghost .pet-body { animation: ghost-drift 2s ease-in-out infinite; }
-
-/* ===== MINI DEMON (spawned on neglect) ===== */
-.mini-demon {
-  position: fixed;
-  font-size: 1.6rem;
-  pointer-events: none;
-  z-index: 50;
-  animation: mini-scurry linear infinite;
-  text-shadow: 0 0 8px red;
-}
-@keyframes mini-scurry {
-  0%{ transform: translateY(0) scaleX(1); }
-  49%{ transform: translateY(0) scaleX(1); }
-  50%{ transform: translateY(0) scaleX(-1); }
-  100%{ transform: translateY(0) scaleX(-1); }
-}
-
-/* ===== CHAOS TEXT (random words flying around) ===== */
-.chaos-word {
-  position: fixed;
-  font-family: 'Creepster', cursive;
-  font-size: clamp(0.8rem, 2vw, 1.4rem);
-  color: var(--hell-red);
-  text-shadow: 0 0 10px red;
-  pointer-events: none;
-  z-index: 6;
-  animation: chaos-fly 4s linear forwards;
-  white-space: nowrap;
-}
-@keyframes chaos-fly {
-  0%{ opacity:1; transform: translateY(0) rotate(0deg); }
-  100%{ opacity:0; transform: translateY(-120px) rotate(var(--rot,20deg)); }
-}
-
-/* ===== CRACK EFFECT ===== */
-.crack {
-  position: fixed;
-  pointer-events: none;
-  z-index: 5;
-  font-size: clamp(2rem, 8vw, 5rem);
-  color: rgba(255,0,0,0.2);
-  animation: crack-appear 3s ease-out forwards;
-}
-@keyframes crack-appear {
-  0%{ opacity:1; transform: scale(0.5); }
-  20%{ opacity:0.8; transform: scale(1); }
-  100%{ opacity:0; }
-}
-
-/* ===== EXPLOSION PARTICLES ===== */
-.particle {
-  position: fixed;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999;
-  animation: particle-fly var(--dur,0.8s) ease-out forwards;
-}
-@keyframes particle-fly {
-  0%{ transform: translate(0,0) scale(1); opacity: 1; }
-  100%{ transform: translate(var(--dx,50px), var(--dy,-100px)) scale(0); opacity: 0; }
-}
-
-/* ===== SCREEN FLASH ===== */
-.screen-flash {
-  position: fixed; inset: 0;
-  background: var(--flash-color, white);
-  pointer-events: none;
-  z-index: 998;
-  animation: flash-out 0.4s ease-out forwards;
-}
-@keyframes flash-out {
-  0%{ opacity: 0.8; }
-  100%{ opacity: 0; }
-}
-
-/* ===== PAGE TILT (chaos mode) ===== */
-body.tilt-mode { animation: page-tilt 1s ease-in-out; }
-@keyframes page-tilt {
-  0%,100%{ transform: rotate(0); }
-  25%{ transform: rotate(-2deg); }
-  75%{ transform: rotate(2deg); }
-}
-
-/* ===== CURSOR CHAOS ===== */
-body.cursor-chaos { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ctext y='28' font-size='28'%3E😈%3C/text%3E%3C/svg%3E") 16 16, auto !important; }
-body.cursor-chaos * { cursor: inherit !important; }
-
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0a0005; }
-::-webkit-scrollbar-thumb { background: var(--hell-red); border-radius: 3px; }
-
-/* ===== PET INTERACTION RIPPLE ===== */
-.ripple {
-  position: fixed;
-  border-radius: 50%;
-  border: 2px solid var(--hell-orange);
-  pointer-events: none;
-  z-index: 999;
-  animation: ripple-expand 0.5s ease-out forwards;
-}
-@keyframes ripple-expand {
-  0%{ width:10px; height:10px; opacity:1; margin:-5px; }
-  100%{ width:60px; height:60px; opacity:0; margin:-30px; }
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width: 480px) {
-  #title { font-size: 1.2rem; }
-  .pet-container { width: 130px; }
-  .pet-body { width: 100px; height: 100px; }
-  .pet-canvas { width: 100px; height: 100px; }
-}
+/* Other effects (particles, chaos words, etc.) are in JS */
